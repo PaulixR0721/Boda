@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Detalles de Invitación</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h2 id="nombres"></h2>
+        <p>¡Esperamos que puedan compartir esta fiesta junto a nosotros!</p>
+        <p> NÚMERO DE INVITADOS:</p>
+        <p id="cupos"></p>
+        <button onclick="window.location.href='TarjetaDeInvitacion.html'">ABRIR INVITACIÓN</button>
+        
+    </div>
+    <script>
+        
+        let codigos = {};
+      
+        fetch('codigos.csv')
+          .then(response => response.text())
+          .then(text => {
+            const lineas = text.trim().split('\n');
+            // Obtener encabezados (primera línea)
+            const encabezados = lineas[0].split(',').map(h => h.trim());
+            
+            lineas.slice(1).forEach(linea => {
+              const valores = linea.split(',').map(v => v.trim());
+              const codigo = valores[0];
+              const cupos = parseInt(valores[1]);
+              const nombres = valores[2];
+      
+              codigos[codigo] = {
+                cupos: cupos,
+                nombres: nombres
+              };
+            });
+      
+            const codigo = localStorage.getItem('codigoInvitacion');
+            const datos = codigos[codigo];
+      
+            if (codigo && datos !== undefined) {
+              document.getElementById('cupos').textContent = `${datos.cupos}`;
+              document.getElementById('nombres').textContent = datos.nombres.replaceAll(';', ', ');
+            } else {
+              document.getElementById('cupos').textContent = 'Código no válido o expirado.';
+              document.getElementById('nombres').textContent = '';
+            }
+          });
+      </script>      
+</body>
+</html>

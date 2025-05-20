@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Invitación</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h2>¡NOS ENCANTARÍA QUE SEAS PARTE DE ESTE DÍA TAN ESPECIAL!</h2>
+    <p>Ingresá tu código para continuar:</p>
+    <input type="text" id="codigoInput" placeholder="Código de invitación" />
+    <button onclick="verificarCodigo()">VER INVITACIÓN</button>
+    <p id="mensajeError" style="color: red; margin-top: 10px;"></p>
+  </div>
+  <script>
+    // Variable global para almacenar los datos del CSV
+    let datosCSV = [];
+    
+    // Limpiar cualquier sesión anterior cuando se carga la página inicial
+    window.onload = function() {
+        sessionStorage.clear();
+        // Cargar el CSV al iniciar
+        cargarCSV();
+        
+        // Permitir enviar el formulario presionando Enter
+        document.getElementById('codigoInput').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                verificarCodigo();
+            }
+        });
+    }
+    
+    // Función para cargar el CSV
+    function cargarCSV() {
+        fetch('codigos.csv')
+            .then(response => {
+                if (!response.ok) {
+                    console.error('Error al cargar el archivo CSV:', response.statusText);
+                    mostrarError("Error al cargar la lista de invitados. Por favor, contacta al administrador.");
+                    return;
+                }
+                return response.text();
+            })
+            .then(csv => {
+                if (csv) {
+                    // Procesar el CSV
+                    const filas = csv.split('\n');
+                    // Ignorar la primera fila (encabezados)
+                    for (let i = 1; i < filas.length; i++) {
+                        const fila = filas[i].trim();
+                        if (fila) {  // Ignorar filas vacías
+                            const columnas = fila.split(',');
+                            if (columnas.length >= 3) {
+                                datosCSV.push([
+                                    columnas[0].trim(),  // codigo
+                                    columnas[2].trim(),  // nombres
+                                    parseInt(columnas[1].trim(), 10) || 1  // cupos (convertido a número)
+                                ]);
+                            }
+                        }
+                    }
+                    console.log('CSV cargado con éxito:', datosCSV.length, 'registros');
+                }
+            })
+            .catch(error => {
+                console.error('Error al procesar el CSV:', error);
+                mostrarError("Error al procesar la lista de invitados. Por favor, contacta al administrador.");
+            });
+    }
+    
+    // La función que va a verificar nuestro código contra el CSV
+    function verificarCodigo() {
+        const codigo = document.getElementById('codigoInput').value.trim();
+        if (!codigo) {
+            mostrarError("Por favor, introduce un código.");
+            return;
+        }
+
+        // Verificar si se cargaron datos del CSV
+        if (datosCSV.length === 0) {
+            mostrarError("La lista de invitados no está disponible en este momento. Por favor, intenta más tarde.");
+            return;
+        }
+
+        // Buscar el código en los datos
+        const invitacion = datosCSV.find(fila => fila[0] === codigo);
+        
+        if (invitacion) {
+            // Guardar los datos de la invitación en sessionStorage
+            sessionStorage.setItem('codigoVerificado', 'true');
+            sessionStorage.setItem('invitacionDatos', JSON.stringify({
+                codigo: invitacion[0],
+                nombre: invitacion[1],
+                numeroInvitados: invitacion[2]
+            }));
+            
+            // Redirigir a la página 2
+            window.location.href = 'Invitacion.html';
+        } else {
+            mostrarError("Código no válido. Por favor, verifica e intenta nuevamente.");
+        }
+    }
+
+    function mostrarError(mensaje) {
+        const errorDiv = document.getElementById('mensajeError');
+        errorDiv.textContent = mensaje;
+    }
+  </script>
+</body>
+</html>
