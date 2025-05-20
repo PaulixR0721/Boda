@@ -1,15 +1,60 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarjeta de Invitación</title>
+    <link rel="stylesheet" href="style2.css">
 </head>
 <body>
+    <!-- Contenedor para mostrar error -->
+    <div id="errorContainer" class="error-container">
+        <div class="error-message">Debes verificar tu código de invitación primero</div>
+        <button onclick="volverAInicio()">Ir a verificación</button>
+    </div>
+    
+    <!-- Contenedor de la tarjeta -->
+    <div id="tarjetaContainer">
+        <h1>HOLA</h1>
+        <div>
+            <p id="codigoTarjeta"></p>
+            <p id="nombreTarjeta"></p>
+            <p>Número de invitados: <span id="numeroInvitadosTarjeta"></span></p>
+        </div>
+        <button onclick="volverAInicio()">Volver al inicio</button>
+    </div>
+
     <script>
-        if (sessionStorage.getItem('codigoVerificado') !== 'true') {
-          window.location.href = 'index.html';
+        // Verificar si el usuario ha pasado por la verificación y la página 2
+        window.onload = function() {
+            const codigoVerificado = sessionStorage.getItem('codigoVerificado');
+            const pasoPagina2 = sessionStorage.getItem('pasoPagina2');
+            
+            if (!codigoVerificado || codigoVerificado !== 'true' || !pasoPagina2 || pasoPagina2 !== 'true') {
+                // No ha pasado por la verificación o la página 2
+                document.getElementById('errorContainer').style.display = 'block';
+                return;
+            }
+            
+            // Mostrar los datos de la invitación
+            const invitacionDatos = JSON.parse(sessionStorage.getItem('invitacionDatos'));
+            
+            if (invitacionDatos) {
+                document.getElementById('codigoTarjeta').textContent = 'Código: ' + invitacionDatos.codigo;
+                document.getElementById('nombreTarjeta').textContent = invitacionDatos.nombre;
+                document.getElementById('numeroInvitadosTarjeta').textContent = invitacionDatos.numeroInvitados;
+                
+                // Mostrar la tarjeta
+                document.getElementById('tarjetaContainer').style.display = 'block';
+            } else {
+                // Datos no encontrados
+                document.getElementById('errorContainer').style.display = 'block';
+            }
+        }
+        
+        function volverAInicio() {
+            window.location.href = 'index.html';
         }
     </script>
-    <h1>HOLA</h1>
 </body>
 </html>
