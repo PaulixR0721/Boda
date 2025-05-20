@@ -4,57 +4,95 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tarjeta de Invitación</title>
-    <link rel="stylesheet" href="style2.css">
+      <link rel="stylesheet" href="style2.css">
+    <style>
+        /* El contenedor principal estará oculto hasta que pase la verificación */
+        #contenidoPrincipal {
+            display: none;
+        }
+    </style>
 </head>
-<body>
-    <!-- Contenedor para mostrar error -->
-    <div id="errorContainer" class="error-container">
-        <div class="error-message">Debes verificar tu código de invitación primero</div>
-        <button onclick="volverAInicio()">Ir a verificación</button>
-    </div>
-    
-    <!-- Contenedor de la tarjeta -->
-    <div id="tarjetaContainer">
-        <h1>HOLA</h1>
-        <div>
-            <p id="codigoTarjeta"></p>
-            <p id="nombreTarjeta"></p>
-            <p>Número de invitados: <span id="numeroInvitadosTarjeta"></span></p>
-        </div>
-        <button onclick="volverAInicio()">Volver al inicio</button>
-    </div>
 
+<body>
+    <!-- Contenedor principal que solo se mostrará tras la verificación -->
+     <section id="contenidoPrincipal">
+        <div id="portada">
+            <img src="DYA.png" alt="">
+        </div>
+        <div id="text1">
+            <h1>A veces lo que empieza como una locura, se convierte en lo mejor de tu vida.</h1>
+        </div>
+        <div class="countdown-container">
+        <p class="countdown-title">TE ESPERAMOS EL DÍA</p>
+        <h2 class="countdown-date">11 de Julio</h2>
+            <div class="countdown">
+                <div class="time">
+                <span id="days">0</span>
+                <p>Días</p>
+                </div>
+                <span class="separator">:</span>
+                <div class="time">
+                <span id="hours">0</span>
+                <p>Hs</p>
+                </div>
+                <span class="separator">:</span>
+                <div class="time">
+                <span id="minutes">0</span>
+                <p>Min</p>
+                </div>
+                  <span class="separator">:</span>
+                <div class="time">
+                <span id="seconds">0</span>
+                <p>Seg</p>
+                </div>
+            </div>
+        </div>
+
+     </section>
     <script>
-        // Verificar si el usuario ha pasado por la verificación y la página 2
+        // Script de verificación
         window.onload = function() {
+            // Verificar si el usuario ha completado el proceso
             const codigoVerificado = sessionStorage.getItem('codigoVerificado');
             const pasoPagina2 = sessionStorage.getItem('pasoPagina2');
             
+            // Si no ha completado el proceso, mostrar alert y redirigir
             if (!codigoVerificado || codigoVerificado !== 'true' || !pasoPagina2 || pasoPagina2 !== 'true') {
-                // No ha pasado por la verificación o la página 2
-                document.getElementById('errorContainer').style.display = 'block';
+                alert("Debes verificar tu código de invitación primero");
+                window.location.href = 'index.html';
                 return;
             }
             
-            // Mostrar los datos de la invitación
-            const invitacionDatos = JSON.parse(sessionStorage.getItem('invitacionDatos'));
-            
-            if (invitacionDatos) {
-                document.getElementById('codigoTarjeta').textContent = 'Código: ' + invitacionDatos.codigo;
-                document.getElementById('nombreTarjeta').textContent = invitacionDatos.nombre;
-                document.getElementById('numeroInvitadosTarjeta').textContent = invitacionDatos.numeroInvitados;
-                
-                // Mostrar la tarjeta
-                document.getElementById('tarjetaContainer').style.display = 'block';
-            } else {
-                // Datos no encontrados
-                document.getElementById('errorContainer').style.display = 'block';
-            }
-        }
-        
-        function volverAInicio() {
-            window.location.href = 'index.html';
+            // Si pasó la verificación, mostrar el contenido
+            document.getElementById('contenidoPrincipal').style.display = 'block';
         }
     </script>
+    <script>
+  const countdownDate = new Date("July 11, 2025 00:10:00").getTime();
+
+  function updateCountdown() {
+    const now = new Date().getTime();
+    const distance = countdownDate - now;
+
+    if (distance <= 0) {
+      document.querySelector(".countdown").innerHTML = "¡Ya llegó el día!";
+      return;
+    }
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    document.getElementById("days").textContent = days;
+    document.getElementById("hours").textContent = hours;
+    document.getElementById("minutes").textContent = minutes;
+    document.getElementById("seconds").textContent = seconds;
+  }
+
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+</script>
+
 </body>
 </html>
