@@ -1,48 +1,48 @@
-codigos;cupos;nombres
-INV01;3;Adriana,Lazaro & Juan camilo
-INV02;2;Jessica & Felipe
-INV03;2;Cristina & Evelyn
-INV04;1;William
-INV05;1;Amparo Daza
-INV06;1;Javier Daza
-INV07;2;Julian & Liss
-INV08;1;Mateo Daza
-INV09;1;Mariana Mendoza
-INV10;2;Orleny & Marlon
-INV11;2;Kathe & Emma
-INV12;2;Leonardo & Angie
-INV13;3;Ramiro,Dayana & Sherazade
-INV14;3;Martha,Giovanni & Tatiana
-INV15;3;Orlando,Erika & Jacobo
-INV16;2;Oscar & Lorena
-INV17;1;Sofia Gonzalez
-INV18;1;Alicia Gonzalez
-INV19;1;Eulalia Gerena
-INV20;2;Telemaco & Emma
-INV21;2;Willson & Sofia
-INV22;2;Jose & Yesenia
-INV23;2;Nelson& Diva
-INV24;3;Francy,Paula & Gaby
-INV25;2;Carlos & Angela
-INV26;2;Catherin Lopez & Sofia Cardona
-INV27;2;Leidy & Novio
-INV28;1;Nidia
-INV29;1;Tatiana
-INV30;2;Camilo & Carol
-INV31;2;Camila & Jose
-INV32;2;Jenny & El lindo
-INV33;2;Jonathan David & esposa
-INV34;2;Eva Maria & Julian
-INV35;1;Stefanny Berbeo
-INV36;2;Ingrid & Alejandro
-INV37;1; Santiago Bayona
-INV38;1;Haider Ramirez
-INV39;1;Heidy Torres
-INV40;1;Alejandra 
-INV41;1;Margie Rincon
-INV42;2;Jenny Gerena & El mono
-INV43;2;Edwin Gerena & Miriam
-INV44;1;Tobias Gerena
-INV45;1;Mafe
-INV46;1;Valentina
-INV47;1;Laura
+codigos,cupos,nombres
+INV01,3,Adriana - Lazaro & Juan camilo
+INV02,2,Jessica & Felipe
+INV03,2,Cristina & Evelyn
+INV04,1,William
+INV05,1,Amparo Daza
+INV06,1,Javier Daza
+INV07,2,Julian & Liss
+INV08,1,Mateo Daza
+INV09,1,Mariana Mendoza
+INV10,2,Orleny & Marlon
+INV11,2,Kathe & Emma
+INV12,2,Leonardo & Angie
+INV13,3,Ramiro - Dayana & Sherazade
+INV14,3,Martha - Giovanni & Tatiana
+INV15,3,Orlando,Erika & Jacobo
+INV16,2,Oscar & Lorena
+INV17,1,Sofia Gonzalez
+INV18,1,Alicia Gonzalez
+INV19,1,Eulalia Gerena
+INV20,2,Telemaco & Emma
+INV21,2,Willson & Sofia
+INV22,2,Jose & Yesenia
+INV23,2,Nelson& Diva
+INV24,3,Francy - Paula & Gaby
+INV25,2,Carlos & Angela
+INV26,2,Catherin Lopez & Sofia Cardona
+INV27,2,Leidy & Novio
+INV28,1,Nidia
+INV29,1,Tatiana
+INV30,2,Camilo & Carol
+INV31,2,Camila & Jose
+INV32,2,Jenny & El lindo
+INV33,2,Jonathan David & esposa
+INV34,2,Eva Maria & Julian
+INV35,1,Stefanny Berbeo
+INV36,2,Ingrid & Alejandro
+INV37,1, Santiago Bayona
+INV38,1,Haider Ramirez
+INV39,1,Heidy Torres
+INV40,1,Alejandra 
+INV41,1,Margie Rincon
+INV42,2,Jenny Gerena & El mono
+INV43,2,Edwin Gerena & Miriam
+INV44,1,Tobias Gerena
+INV45,1,Mafe
+INV46,1,Valentina
+INV47,1,Laura
